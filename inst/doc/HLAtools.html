@@ -18,7 +18,6 @@
 <meta name="author" content="Josh Bredeweg" />
 <meta name="author" content="Steven J. Mack, PhD – steven.mack@ucsf.edu" />
 
-<meta name="date" content="2024-07-21" />
 
 <title>HLAtools</title>
 
@@ -352,13 +351,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h4 class="author">Vinh Luu – <a href="mailto:vinhluu864@berkeley.edu" class="email">vinhluu864@berkeley.edu</a></h4>
 <h4 class="author">Josh Bredeweg</h4>
 <h4 class="author">Steven J. Mack, PhD – <a href="mailto:steven.mack@ucsf.edu" class="email">steven.mack@ucsf.edu</a></h4>
-<h4 class="date">2024-07-21</h4>
 
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(HLAtools)</span></code></pre></div>
 <ul>
-<li>Package Version: 1.1.1</li>
+<li>Package Version: 1.2.0</li>
 </ul>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
@@ -372,8 +370,9 @@ IPD-IMGT/HLA Database, organize them into useful categories, and
 identify their gene feature boundaries.</li>
 <li>The ability to build local amino acid, codon, coding nucleotide, and
 genomic nucleotide sequence alignments for HLA genes of interest.</li>
-<li>Advanced tools of the comparison and dissection of allele sequences,
-and the construction of customized multi-gene sequence alignments.</li>
+<li>Advanced tools of the comparison and dissection of allele names and
+allele sequences, and the construction of customized multi-gene sequence
+alignments.</li>
 <li>Functions that translate allele names, vectors and data frames of
 allele names, and Genotype List (GL) String Code messages across
 IPD-IMGT/HLA database release versions, and inter-convert between GL
@@ -405,7 +404,7 @@ IPD-IMGT/HLA Database.</p>
 it can take several minutes to build a full complement of atlases. For
 example, building all of the atlases for IPD-IMGT/HLA Database release
 version 3.56.0 took 4.2 minutes on a 3.3 GHz 12-Core Intel Xenon W 2019
-Mac Pro with 288 GB of 2933 MHZ DDR4 RAM, and 4.6 minutes on a 2.4 GHz
+Mac Pro with 288 GB of 2933 MHZ DDR4 RAM, 4.6 minutes on a 2.4 GHz
 8-Core Intel Core i9 2019 MacBook Pro with 64 GB of 2667 MHZ DDR4 RAM,
 and 5.24 minutes on a 2.4 GHz Intel Core i9-10885H Dell Precision 5500
 with 32 GB of RAM.</p>
@@ -513,12 +512,13 @@ readability).</p>
 <div id="historical-catalogue-of-hla-allele-names" class="section level2">
 <h2>Historical Catalogue of HLA Allele Names</h2>
 <p>The <em>alleleListHistory</em> data object is a data frame that
-identifies all HLA and MIC allele names and their accession identifiers
-(HLA_IDs) for all IPD-IMGT/HLA Database release versions (e.g., “X3350”
-represents version 3.35.0) going back to version 1.05.0 (January of
-2000), and includes allele names that have been changed or deleted. A
-new <em>alleleListHistory</em> can be built after each IPD-IMGT/HLA
-Database release using the <em>updateAll()</em> function.</p>
+identifies all HLA, MIC and TAP allele names and their accession
+identifiers (HLA_IDs) for all IPD-IMGT/HLA Database release versions
+(e.g., “X3350” represents version 3.35.0) going back to version 1.05.0
+(January of 2000), and includes allele names that have been changed or
+deleted. A new <em>alleleListHistory</em> can be built after each
+IPD-IMGT/HLA Database release using the <em>updateAll()</em>
+function.</p>
 <pre><code>alleleListHistory$AlleleListHistory[1:5,1:5]
     HLA_ID          X3560          X3550          X3540          X3530
 1 HLA00001  A*01:01:01:01  A*01:01:01:01  A*01:01:01:01  A*01:01:01:01
@@ -581,8 +581,8 @@ included in these vectors for the purpose of validation when these
 combined alignments are desired.</p>
 </div>
 </div>
-<div id="annotation-of-pseudogene-and-gene-fragement-features" class="section level2">
-<h2>Annotation of Pseudogene and Gene Fragement Features</h2>
+<div id="annotation-of-pseudogene-and-gene-fragment-features" class="section level2">
+<h2>Annotation of Pseudogene and Gene Fragment Features</h2>
 <p>The <em>fragmentFeatureNames</em> object identifies and annotates the
 non-standard gene features found in pseudogenes and gene fragments,
 based on the positions of feature boundaries (“|”) in the pertinent
@@ -605,11 +605,12 @@ feature</li>
 <em>fragmentFeatureNames</em> element contains a $features element
 identifying the gene features in the 5’ to 3’ direction, and an
 $annotation element that provides some detail about the feature.</p>
-<p>These non-standard gene features are included the feature boundaries
-of the gene fragments and pseudogenes in the <em>HLAatlas</em>.</p>
+<p>These non-standard gene features are included in the feature
+boundaries of the gene fragments and pseudogenes in the
+<em>HLAatlas</em>.</p>
 <p>The current annotations should not change across IPD-IMGT/HLA
-Database releases. Wen a new pseudogene or gene-fragment is added to the
-IPD-IMGT/HLA Database, a new annotation will be added as part of a
+Database releases. When a new pseudogene or gene-fragment is added to
+the IPD-IMGT/HLA Database, a new annotation will be added as part of a
 package update.</p>
 <pre><code>fragmentFeatureNames$DPA2
 $features
@@ -864,7 +865,7 @@ DQA2 and DQB2 genes had not been made available.</p>
 DRB3, DRB4 and DRB5. In release versions 3.0.0 to 3.23.0, genomic DRB1
 alignments are in ‘DRB_gen.txt’ files, and these alignments are in
 ‘DRB1_gen.txt’ files in subsequent releases. Building DPA1, DPB1, DQA1,
-DQB1, DRB1, DRB3 and DRB5 sequence alignments from these earlier
+DQB1, DRB1, DRB3, DRB4 and DRB5 sequence alignments from these earlier
 releases may require specifying a gene name that does not include the
 numerical suffix. When the <em>HLAgazeteer</em> has been updated to the
 desired release version, the available gene names for that release can
@@ -893,8 +894,67 @@ HLAalignments &lt;- alignmentFull(c(&quot;C&quot;,&quot;DQB&quot;),alignType = c
 </div>
 </div>
 </div>
-<div id="search-and-query-functions" class="section level1">
-<h1>3. Search and Query Functions</h1>
+<div id="trim-search-and-query-functions" class="section level1">
+<h1>3. Trim, Search and Query Functions</h1>
+<div id="trimming-hla-allele-names-by-digits-or-fields" class="section level2">
+<h2>Trimming HLA Allele Names by Digits or Fields</h2>
+<p>The <em>alleleTrim()</em> function shortens an HLA allele name to a
+specified number of fields or digits, depending on the pertinent
+nomenclature epoch. Epoch 1 allele names are found in IPD-IMGT/HLA
+Database releases 1.0.0 to 1.16.0, epoch 2 allele names are found in
+releases 2.0.0 to 2.28.0, and epoch 3 allele names are found in releases
+3.0.0 and onward. Expression variant suffixes in full-length allele
+names can be appended to truncated allele names, but will not be removed
+from full-length allele names that have fewer than four fields or eight
+digits.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><em>allele</em>: An HLA allele name formatted as locus*allele_name,
+optionally including the “HLA-” prefix.</li>
+<li><em>resolution</em>: A number identifying the number of fields to
+trim the allele name to.</li>
+<li><em>version</em>: A number identifying the HLA nomenclature epoch
+under which the allele was named. The default value is 3.</li>
+<li><em>append</em>: A logical. When append = TRUE, the expression
+variant suffix of a full-length allele name is appended to a truncated
+allele name. The default value is FALSE.</li>
+</ul>
+<p><strong>Return</strong> The trimmed allele name, shortened according
+to the input parameters, is returned.</p>
+<pre><code>alleleTrim(allele = &quot;A*03:01:01&quot;, resolution = 2)
+[1] &quot;A*03:01&quot;
+
+alleleTrim(allele = &quot;A*0303N&quot;,resolution = 1,version = 1, append = TRUE)
+[1] &quot;A*03N
+
+alleleTrim(&quot;HLA-A*24020102L&quot;,resolution = 3,version = 2, append = TRUE)
+[1] &quot;HLA-A*240201L&quot;</code></pre>
+</div>
+<div id="trimming-multiple-hla-allele-names-by-digits-or-fields" class="section level2">
+<h2>Trimming Multiple HLA Allele Names by Digits or Fields</h2>
+<p>The <em>multiAlleleTrim()</em> function applies <em>alleleTrim()</em>
+to a vector to allele names. The vector must contain only allele names,
+and all allele names in the vector must belong to the same nomenclature
+epoch.</p>
+<ul>
+<li><em>alleles</em>: A vector of HLA allele names from a single
+nomenclature epoch.</li>
+<li><em>resolution</em>: A number identifying the number of fields to
+which the alleles should be trimmed.</li>
+<li><em>version</em>: A number identifying the HLA nomenclature epoch
+under which the allele was named. The default value is 3.</li>
+<li><em>append</em>: A logical. When append = TRUE, the expression
+variant suffix of a full-length allele name is appended to a truncated
+allele name. The default value is FALSE.</li>
+</ul>
+<p><strong>Return</strong> A vector of trimmed allele names, shortened
+according to the input parameters, is returned.</p>
+<pre><code>alleles &lt;- c(&quot;A*02:01:01:02L&quot;,&quot;DRB1*08:07&quot;, &quot;DQB1*04:02:01:16Q&quot;)
+multiAlleleTrim(alleles,2)
+[1] &quot;A*02:01&quot;    &quot;DRB1*08:07&quot; &quot;DQB1*04:02&quot;
+multiAlleleTrim(alleles,2,append = TRUE)
+[1] &quot;A*02:01L&quot;    &quot;DRB1*08:07&quot;  &quot;DQB1*04:02Q&quot;</code></pre>
+</div>
 <div id="identifying-differences-between-alleles-at-a-locus" class="section level2">
 <h2>Identifying Differences Between Alleles at a Locus</h2>
 <p>The <em>compareSequences()</em> function identifies sequence
@@ -1019,7 +1079,7 @@ motifMatch(&quot;A*196G~301A~3046T&quot;,&quot;gen&quot;,TRUE)
 <div id="building-custom-alignments" class="section level2">
 <h2>Building Custom Alignments</h2>
 <p>The <em>customAlign()</em> function returns a customized peptide,
-codon, coding nucleotide or genomic nucleotide alignment specified
+codon, coding nucleotide or genomic nucleotide alignment for specified
 alleles at specified positions.</p>
 <p><strong>Parameters</strong></p>
 <ul>
@@ -1134,9 +1194,9 @@ multiUpdateGL(GLSC.ex[[2]][1], Version = &quot;3.53.0&quot;)
 1 hla#3.53.0#HLA-A*02:01:01:01~HLA-C*07:02:01:01~HLA-B*07:02:01:01~HLA-DRB1*15:01:01:01~HLA-DQB1*06:02:01:01~HLA-DPB1*04:02:01:01+HLA-A*01:01:01:01~HLA-C*06:02:01:01~HLA-B*57:01:01:01~HLA-DRB1*07:01:01:01~HLA-DQB1*03:03:02:01~HLA-DPB1*04:01:01:01</code></pre>
 </div>
 </div>
-<div id="translate-vectors-and-data-frames-of-hla-allele-name-data-across-ipd-imgthla-database-releases" class="section level2">
+<div id="translate-vectors-and-data-frames-of-hla-allele-name-data-across-ipd-imgthla-database-release-versions" class="section level2">
 <h2>Translate vectors and data frames of HLA allele name data across
-IPD-IMGT/HLA Database releases</h2>
+IPD-IMGT/HLA Database Release Versions</h2>
 <p>The GIANT() function applies GLupdate() to translate HLA allele name
 data across IPD-IMGT/HLA Database release versions, back to version
 1.05.0, and functions on both vectors and data frames of HLA allele name
@@ -1213,7 +1273,7 @@ validateGLstring(GLstring,&quot;1.1&quot;)
 <div id="glstouni" class="section level3">
 <h3>GLStoUNI</h3>
 <p>The <em>GLStoUNI()</em> function converts genotype data from GL
-String format to UNIFORMAT format. Because the <a href="https://glstring.org/syntax-1.1.html">GL String ‘?’ delimeter</a>
+String format to UNIFORMAT format. Because the <a href="https://glstring.org/syntax-1.1.html">GL String ‘?’ delimiter</a>
 has no UNIFORMAT cognate, this function does not support the ‘?’
 delimiter or the <a href="https://pubmed.ncbi.nlm.nih.gov/37286192">GL
 String v1.1</a> format.</p>
@@ -1314,7 +1374,7 @@ A*02:01+A*03:01|A*02:01,A*03:02|A*02:02,A*03:01|A*02:02,A*03:02 contains operato
 <div id="unitogls" class="section level3">
 <h3>UNItoGLS</h3>
 <p>The <em>UNItoGLS()</em> function converts a single UNIFORMAT string
-to GL string format.</p>
+to GL String format.</p>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><em>uniformat</em> A string of HLA allele names and operators in the
@@ -1430,7 +1490,7 @@ categories may be, e.g., two groups of patients with the same disease,
 where one group has more severe symptoms (coded as 1), and other has
 mild symptoms (coded as 0). In this case, relRisk() identifies the risk
 of severity associated with a given allele or genotype.</p>
-<p>relrisk() returns a list object of two lists (“alleles” and
+<p>relRisk() returns a list object of two lists (“alleles” and
 “genotypes”), each of which contains relative risk, confidence interval
 and p-value data for the individual alleles and individual genotypes at
 each locus in a BIGDAWG-formatted non-case-control genotype data frame
@@ -1456,8 +1516,8 @@ Significant.</p>
 <div id="division-of-bigdawg-formatted-datasets-for-stratification-analyses" class="section level2">
 <h2>Division of BIGDAWG-formatted Datasets for Stratification
 Analyses</h2>
-<div id="bdstrat-multilocus-allele-stratificaiton-for-bigdawg-datasets" class="section level3">
-<h3>BDstrat: Multilocus Allele Stratificaiton for BIGDAWG Datasets</h3>
+<div id="bdstrat-multilocus-allele-stratification-for-bigdawg-datasets" class="section level3">
+<h3>BDstrat: Multilocus Allele Stratification for BIGDAWG Datasets</h3>
 <p>The BDstrat() function divides a <a href="https://CRAN.R-project.org/package=BIGDAWG/vignettes/BIGDAWG.html#input-data">BIGDAWG-formatted</a>]
 dataset into two strata, one of which contains all subjects with any of
 a set of specified alleles, while the other contains all subjects
@@ -1504,9 +1564,9 @@ Datasets</h4>
 <li>BDtoPyPop() converts a <a href="https://CRAN.R-project.org/package=BIGDAWG/vignettes/BIGDAWG.html#input-data">BIGDAWG-formatted</a>
 case-control dataset into two <a href="http://pypop.org/docs/guide-chapter-usage.html">PyPop version
 1.*.*</a> datasets – one for all ‘case’ subjects and one for all
-‘control’ subjects. PyPop can be exported as a pair of “.pop” files for
-analysis, or can be generated as a list object containing two data
-frames for additional manipulation before analysis.</li>
+‘control’ subjects. PyPop datasets can be exported as a pair of “.pop”
+files for analysis, or can be generated as a list object containing two
+data frames for additional manipulation before analysis.</li>
 </ul>
 <p><strong>Parameters</strong></p>
 <ul>

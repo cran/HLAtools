@@ -30,7 +30,10 @@ Additional Features used in these annotations, based on boundaries indicated in 
 \item J - Join, a sequence that includes two or more features that are separated by a feature boundary in the reference
 \item N - Novel, a novel sequence that does correspond to a known feature sequence
 \item S - Segment, a subset of a longer feature sequence
+}
+
 Reference Genes
+\itemize{
 \item HLA-C genomic sequence is used as the reference for class I pseudogenes and gene fragments.
 \item HLA-DPA1 and -DPB1 genomic sequences are used as the references for class II pseudogenes -DPA2 and -DPB2, respectively.
 }
@@ -38,7 +41,7 @@ Reference Genes
 \note{
 Features and their annotations have been identified manually. Feature annotations will not change unless a new pseudogene or gene fragment is added in a future release, in which case new annotations will be generated.
 
-The H and J features are described for class I pseudogenes and gene fragment sequences, all of which are described relative to the HLA-C reference sequence. Feature length differences for DPA2 and DPB2, relative to the DPA1 and DPB1 references, are noted in annotations of standard feature abbreviations (E, I and U).
+The H, J, N and S features are described for class I pseudogenes and gene fragment sequences, all of which are described relative to the HLA-C reference sequence. Feature length differences for DPA2 and DPB2, relative to the DPA1 and DPB1 references, are noted in annotations of standard feature abbreviations (E, I and U).
 
 No annotations are included for the DRB2, DRB6, DRB7, and DRB9 genes, as genomic alignments for these genes are not available.
 

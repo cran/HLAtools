@@ -1,7 +1,7 @@
 Package: HLAtools
 Type: Package
 Title: Toolkit for HLA Immunogenomics
-Version: 1.1.1
+Version: 1.2.0
 Authors@R: 
     c(person("Livia", "Tran", , "livia.tran@ucsf.edu", role = c("aut")),
     person("Ryan", "Nickens", , "rynickens@gmail.com", role = c("aut")),
@@ -25,7 +25,7 @@ VignetteBuilder: knitr
 License: GPL (>= 3)
 URL: <https://github.com/sjmack/HLAtools>
 NeedsCompilation: no
-Packaged: 2024-07-22 05:44:30 UTC; sjmack
+Packaged: 2024-09-02 16:29:22 UTC; sjmack
 Author: Livia Tran [aut],
   Ryan Nickens [aut],
   Leamon Crooms IV [aut],
@@ -34,4 +34,4 @@ Author: Livia Tran [aut],
   Josh Bredeweg [ctb],
   Steven Mack [aut, cre] (<https://orcid.org/0000-0001-9820-9547>)
 Repository: CRAN
-Date/Publication: 2024-07-26 19:40:11 UTC
+Date/Publication: 2024-09-02 20:10:02 UTC
