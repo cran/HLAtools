@@ -2,7 +2,7 @@
 % Please edit documentation in R/GLupdater.R
 \name{GLV2}
 \alias{GLV2}
-\title{Format GL String Code version number.}
+\title{Format GL String Code Version Number}
 \usage{
 GLV2(Version)
 }
@@ -26,5 +26,5 @@ GLV2("3.0.0")
 \references{
 Mack et al. HLA 2023;102(2):206-212 https://doi.org/10.1111/tan.15126
 
-Mack et al. HLA 05 July 2023 https://doi.org/10.1111/tan.15145
+Mack et al. HLA 2023;102(4):501-507 https://doi.org/10.1111/tan.15145
 }

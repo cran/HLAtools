@@ -1,4 +1,4 @@
-#alleleTrim v2.1.0 8/20/2024 -- Steven J. Mack
+#alleleTrim v2.2.0 25/20/2025 -- Steven J. Mack
 
 ################
 ##alleleTrim
@@ -95,7 +95,7 @@ alleleTrim <- function(allele,resolution,version=3,append = FALSE){
 #'@description
 #' Trims a properly formatted colon-delimited HLA allele name to a desired number of fields.
 #' 
-#' If an allele name with an expression-variant suffix is truncated, the suffix can be appended to the end of the truncated allele name. If a resolution value greater then the number of fields in the submitted field is specified, the original allele is returned.
+#' If an allele name with an expression-variant suffix is truncated, the suffix can be appended to the end of the truncated allele name. If a resolution value greater than the number of fields in the submitted field is specified, the original allele is returned.
 #'
 #' @param allele A character string representing an HLA allele.
 #' @param res A numeric describing the resolution desired.
@@ -115,15 +115,19 @@ getField <- function(allele,res,append=FALSE) {
   Tmp <- unlist(strsplit(as.character(allele),":"))
   suffix <- ""
   
-  if(length(Tmp) < res) return(allele) # added in case the requested resolution is larger than the allele's resolution
+  if(!is.logical(append)) {stop(paste("The value of 'append' [",append,"] is not a logical.",sep=""))}
   
-  if(substr(Tmp[length(Tmp)],nchar(Tmp[length(Tmp)]),nchar(Tmp[length(Tmp)])) %in% c("N","L","S","C","A","Q")) {suffix <- substr(Tmp[length(Tmp)],nchar(Tmp[length(Tmp)]),nchar(Tmp[length(Tmp)])) }
+  if(length(Tmp) < res) { return(allele) } # added in case the requested resolution is larger than the allele's resolution
+  
+  if(grepl("[N,L,S,C,A,Q]",stringr::str_sub(allele, -1))) {suffix <- stringr::str_sub(allele, -1) }
   
   if (length(Tmp)<2) {
     return(allele)
-  } else if (res==1) {
+  } else if(res==1) {
     return(paste(Tmp[1],ifelse(append,suffix,""),sep=""))
-  } else if (res > 1) {
+  } else if(res > 1) {
+      if(stringr::str_sub(paste(Tmp[1:res],collapse=":"),-1) == suffix) {
+           return(paste(Tmp[1:res],collapse=":")) }
     Out <- paste(paste(Tmp[1:res],collapse=":"),ifelse(append,suffix,""),sep="")
     return(Out)
   }

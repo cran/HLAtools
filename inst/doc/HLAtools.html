@@ -356,7 +356,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(HLAtools)</span></code></pre></div>
 <ul>
-<li>Package Version: 1.3.0</li>
+<li>Package Version: 1.4.0</li>
 </ul>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
@@ -379,7 +379,7 @@ IPD-IMGT/HLA database release versions, and inter-convert between GL
 String and UNIFORMAT formats.</li>
 <li>Data-analysis tools that extend the utility of Bridging
 Immunogenomic Data-Analysis Workflow Gaps (BIGDAWG) formatted datasets
-by performing mutliallele and multilocus stratification, calculating
+by performing multiallele and multilocus stratification, calculating
 Relative Risk measures, and converting BIGDAWG datasets to PyPop
 datasets.</li>
 </ul>
@@ -410,7 +410,7 @@ and 5.24 minutes on a 2.4 GHz Intel Core i9-10885H Dell Precision 5500
 with 32 GB of RAM.</p>
 <p><em>HLAatlas</em> objects can be built for all HLA region genes with
 available genomic, nucleotide and amino acid alignments in release
-versions 3.00.0 to 3.58.0. Barring changes in the structure of the
+versions 3.00.0 to 3.59.0. Barring changes in the structure of the
 source data for this object in future IPD-IMGT/HLA Database releases, it
 should be possible to build <em>HLAatlas</em> objects for future
 releases.</p>
@@ -657,7 +657,7 @@ gene, can be built using the <em>alignmentFull()</em> function, as
 described in Section 2 <em>Working with Sequence Alignments</em>, below.
 <em>HLAalignments</em> objects can be built for all HLA region genes
 with available genomic, nucleotide and amino acid alignments in
-IPD-IMGT/HLA release versions 3.00.0 to 3.58.0. Barring changes in the
+IPD-IMGT/HLA release versions 3.00.0 to 3.59.0. Barring changes in the
 structure of the source data for this object in future IPD-IMGT/HLA
 Database releases, it should be possible to build <em>HLAalignments</em>
 objects for future releases.</p>
@@ -875,7 +875,7 @@ releases may require specifying a gene name that does not include the
 numerical suffix. When the <em>HLAgazeteer</em> has been updated to the
 desired release version, the available gene names for that release can
 be found in the <em>HLAgazeteer</em>.</p>
-<p>In all version 3.*.* releases (3.0.0 to 3.58.0), nucleotide
+<p>In all version 3.*.* releases (3.0.0 to 3.59.0), nucleotide
 alignments for the DRB2, DRB6, DRB7 and DRB9 genes are included in the
 ‘DRB_nuc.txt’ file.</p>
 <p>As noted above, when building alignments for past releases, the
@@ -1145,6 +1145,9 @@ Database release version to which the alleles should be updated.</li>
 return all allele names that match the allele name in ‘GLStringCode’
 (TRUE), or if only the direct HLA accession ID match should be returned
 (FALSE).</li>
+<li><em>verbose</em> A logical that indicates if messages regarding the
+update process should be sent to the console (TRUE) or not (FALSE). The
+default value is FALSE.</li>
 </ul>
 <p>In the examples below, a GLSC containing a single DPB1 allele name,
 as recorded in release version 1.05.0, is translated to version 3.52.0.
@@ -1178,6 +1181,9 @@ which for the alleles should be updated.</li>
 <li><em>expand</em> A logical specifying whether to include only the
 direct HLA ID match (FALSE), or all possible allele matches (TRUE). The
 default value is FALSE.</li>
+<li><em>verbose</em> A logical that indicates if messages regarding the
+update process should be sent to the console (TRUE) or not (FALSE). The
+default value is FALSE.</li>
 </ul>
 <pre><code>GLstringArray
 multiUpdateGL(GLSC.ex[[2]][1], Version = &quot;3.53.0&quot;)
@@ -1187,12 +1193,25 @@ multiUpdateGL(GLSC.ex[[2]][1], Version = &quot;3.53.0&quot;)
 <div id="translate-vectors-and-data-frames-of-hla-allele-name-data-across-ipd-imgthla-database-release-versions" class="section level2">
 <h2>Translate vectors and data frames of HLA allele name data across
 IPD-IMGT/HLA Database Release Versions</h2>
-<p>The GIANT() function applies GLupdate() to translate HLA allele name
-data across IPD-IMGT/HLA Database release versions, back to version
-1.05.0, and functions on both vectors and data frames of HLA allele name
-data, including BIGDAWG-formatted HLA datasets. Data frames that are not
-BIGDAWG-formatted must be entirely composed of columns of HLA allele
-name data.</p>
+<p>The GIANT() function applies translateGLstring() to translate HLA
+allele name data across IPD-IMGT/HLA Database release versions, back to
+version 1.05.0, and functions on both vectors and data frames of HLA
+allele name data, including BIGDAWG-formatted HLA datasets. Data frames
+that are not BIGDAWG-formatted must be entirely composed of columns of
+HLA allele name data.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><em>data</em> A data frame or vector of HLA allele name character
+string data. Allele names in vectors must include locus prefixes. Data
+frames must include column headers identifying a single locus for the
+allele names in that column.</li>
+<li><em>transFrom</em> A dot-formatted character string identifying the
+IPD-IMGT/HLA Database version (e.g. 3.59.0) under which the HLA data
+were generated.</li>
+<li><em>transTo</em> A dot-formatted character string identifying the
+IPD-IMGT/HLA Database version (e.g. 2.25.0) to which which the HLA data
+are to be translated.</li>
+</ul>
 <p><em>Translation of vectors of HLA allele names</em></p>
 <pre><code>GIANT(c(&quot;A*01:01:01:01&quot;,&quot;DQA1*01:01:01:01&quot;),&quot;3.56.0&quot;,&quot;2.20.0&quot;)
 [1] &quot;A*01010101&quot;  &quot;DQA1*010101&quot;
@@ -1477,7 +1496,7 @@ categories should <em>not</em> be patients and controls. Instead, the
 categories may be, e.g., two groups of patients with the same disease,
 where one group has more severe symptoms (coded as 1), and other has
 mild symptoms (coded as 0). In this case, relRisk() identifies the risk
-of severity associated with a given allele or genotype.</p>
+of sefverity associated with a given allele or genotype.</p>
 <p>relRisk() returns a list object of two lists (“alleles” and
 “genotypes”), each of which contains relative risk, confidence interval
 and p-value data for the individual alleles and individual genotypes at

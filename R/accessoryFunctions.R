@@ -1,4 +1,4 @@
-##Accessory Functions v5.0.0 9APR2024
+##Accessory Functions v5.1.0 25JAN2025
 
 ################
 ##posSort
@@ -61,9 +61,9 @@ numFields <- function(allele) {
 #'
 #'@param allele A character string of the colon-delimited HLA allele name.
 #'
-#'@return A logical identifying if the allele name is present in the alignments (TRUE) or, if it is not in the alignments or is not valid not (FALSE).
+#'@return A logical identifying if the allele name is present in the alignments (TRUE) or, if it is not in the alignments or is not valid (FALSE).
 #'
-#'@note Messages will be returned to the console if the allele name is malformed, or the locus is invalid; e.g., validateAllele("C*01:01:01:01") or validateAllele("A*01:01:01:01:01").
+#'@note Messages will be returned to the console if the allele name is malformed, or the locus is invalid; e.g., 'validateAllele("C\*01:01:01:01")' or 'validateAllele("A\*01:01:01:01:01")'.
 #'@note The locus being evaluated must be included in HLAalignments.
 #'
 #'@export
@@ -92,38 +92,51 @@ validateAllele <- function(allele) {
 
 #################
 ##verifyAllele
-#'Determine if an Allele Name Ever Existed, and (if so) its Most Recent IPD-IMGT/HLA Database Release
+#'Determine if an Allele Name Ever Existed, and (if so) in Which IPD-IMGT/HLA Database Releases
 #'
-#'Returns TRUE if an allele name is present in AlleleListHistory or FALSE it is absent, or c(TRUE,version), where 'version' is the most recent IPD-IMGT/HLA Database release in which that name appeared, when version = TRUE.
+#'Returns TRUE if an allele name is present in AlleleListHistory or FALSE it is absent, or c(TRUE,version), where 'version' can be the most recent, original, or all IPD-IMGT/HLA Database releases in which that name appears.
 #'
 #'@param allele A character string of an HLA allele name. Colon-delimited and field-delimited names are both accepted.
-#'@param version A logical that indicates if the most recent nomenclature release version in which that name was valid should be returned. 
+#'@param version A logical that indicates if the most recent nomenclature release version in which that name was valid should be returned. The default value is FALSE.
+#'@param all A logical that indicates if all of the nomenclature release versions in which that name was valid should be returned. The default value is FALSE.
+#'@param first A logical that indicates if only the original nomenclature release version in which that name was valid should be returned. The default value is FALSE.
 #'
-#'@return A logical identifying if the allele name is found in AlleleListHistory (TRUE) or not (FALSE), or c(TRUE,version) if version = TRUE.
+#'@return A logical identifying if the allele name is found in AlleleListHistory (TRUE) or not (FALSE), c(TRUE,version) if version = TRUE.
 #'
 #'@export
 #'
 #'@examples
 #'verifyAllele("A*01:01:01:01")
 #'verifyAllele("A*01:01:01:01",TRUE)
-#'verifyAllele("A*010101",TRUE)
+#'verifyAllele("A*010101",TRUE,TRUE)
 #'verifyAllele("A*0101",TRUE)
 #'
-verifyAllele <- function(allele, version=FALSE){
-
-    resArray <- which(alleleListHistory$AlleleListHistory == allele,arr.ind = TRUE)
-    if(length(resArray)==0) {return(FALSE)}
-      
-    if(!version) {return(TRUE)
+verifyAllele <- function(allele, version=FALSE,all=FALSE,first=FALSE){
+  
+  if(first && !all) {all = TRUE}
+  
+  resArray <- which(alleleListHistory$AlleleListHistory == allele,arr.ind = TRUE)
+  if(length(resArray)==0) {return(FALSE)}
+  
+  if(!version) {return(TRUE)
+      } else {
+        if(!all) {
+          rawVersion <- colnames(alleleListHistory$AlleleListHistory)[resArray[1,2]]
+          return(c(TRUE,expandVersion(substr(rawVersion,start=2,stop = nchar(rawVersion)))))
         } else {
-          rawVersion <- colnames(alleleListHistory$AlleleListHistory)[resArray[1,2][[1]]]
-            return(c(TRUE,expandVersion(substr(rawVersion,start=2,stop = nchar(rawVersion)))))
-          } 
-  }
+            allVersion <- unlist(lapply(unlist(lapply(colnames(alleleListHistory$AlleleListHistory)[resArray[,2]],FUN = substring,2,5)),FUN=expandVersion))
+            if(!first) {
+              c(TRUE, allVersion)
+            } else {
+              c(TRUE,allVersion[length(allVersion)])
+            }
+          }
+        } 
+      }
 
 #################
 ##parseAlignmentHead
-#'Guides For Parsing the Header Blocks of Alignment Files
+#'Guides for Parsing the Header Blocks of Alignment Files
 #'
 #'Returns a vector describing the location of key information in the header blocks of alignment files.
 #'

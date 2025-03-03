@@ -2,7 +2,7 @@
 % Please edit documentation in R/GLupdater.R
 \name{GLVhelper}
 \alias{GLVhelper}
-\title{Locate matches for an incomplete IPD-IMGT/HLA Database version.}
+\title{Locate Matches for an Incomplete IPD-IMGT/HLA Database Version}
 \usage{
 GLVhelper(Version)
 }
@@ -27,5 +27,5 @@ GLVhelper("3.9.0")
 \references{
 Mack et al. HLA 2023;102(2):206-212 https://doi.org/10.1111/tan.15126
 
-Mack et al. HLA 05 July 2023 https://doi.org/10.1111/tan.15145
+Mack et al. HLA 2023;102(4):501-507 https://doi.org/10.1111/tan.15145
 }
