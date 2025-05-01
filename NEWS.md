@@ -1,5 +1,31 @@
 ### HLAtools
 
+### version 1.6.2
+- May 1, 2025
+- Changed |> to %>% operator in buildIMGTHLAGeneTypes() to maintain compatibility with R version 3. Package is now compatible with R version 3.6.0 and later.
+
+### version 1.6.1
+- April 30, 2025
+- Added the 'acc' parameter to verifyAllelle(), appending the IPD-IMGT/HLA accession number for a specified allele to the returned object.
+- Updated News and Vignette.
+- Submission to CRAN.
+
+### version 1.6.0
+- April 29, 2025
+- Added the queryPositions() and variantTable() functions, identifying variants at specified positions in any alignment in HLAalignments.
+- Updated News and Vignette.
+
+### version 1.5.0
+- April 20, 2025
+- Refactored the buildIMGTHLAGeneTypes() function to accommodate the transition of the "molecular characteristics data for HLA region genes" web-page from 'hla.alleles.org/genes/index.html' to 'hla.alleles.org/pages/genes/genes_list'.
+- Updated updateAll() to account for the transition from 'hla.alleles.org/genes/index.html' to 'hla.alleles.org/pages/genes/genes_list' for updating IMGTHLAGeneTypes.
+- Added the validatePositions() function to determine if specified positions exist in a specified type of alignment. 
+- Applied validatePosition() for customAlign(), and updated the customAlign() documentation.
+- Updated buildGazeteer() to include the DRB8 gene in HLAgazeteer$align.
+- Updated IMGTHLAGeneTypes, HLAgazeteer and HLAtlas to version 3.60.0.
+- Added the rvest and stats packages to Imports.
+- The alleleListHistory dataset for IPD-IMGT/HLA Database release versions 3.60.0 and later is too large to be included in the package. The updateAll() function can be applied to load the alleleListHistory object for releases after 3.59.0.
+
 ### Version 1.4.0
 
 - March 1, 2025

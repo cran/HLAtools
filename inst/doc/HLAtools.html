@@ -356,7 +356,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(HLAtools)</span></code></pre></div>
 <ul>
-<li>Package Version: 1.4.0</li>
+<li>Package Version: 1.6.2</li>
 </ul>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
@@ -548,12 +548,12 @@ version of this data object built using the
 Region</h2>
 <div id="molecular-characteristics-of-hla-region-genes" class="section level3">
 <h3>Molecular Characteristics of HLA Region Genes</h3>
-<p>The <em>IMGTHLAGeneTypes</em> data object describes the <a href="https://hla.alleles.org/genes/index.html">named genes in the HLA
-region</a> curated by the IPD-IMGT/HLA Database.
+<p>The <em>IMGTHLAGeneTypes</em> data object describes the <a href="https://hla.alleles.org/pages/genes/genes_list/">named genes
+within the HLA region</a> curated by the IPD-IMGT/HLA Database.
 <em>IMGTHLAGeneTypes</em> distinguishes pseudogenes and gene fragments
 from expressed genes, and summarizes each gene’s molecular
 characteristics.</p>
-<p>The information in this object can be found online at <a href="https://hla.alleles.org/genes/index.html" class="uri">https://hla.alleles.org/genes/index.html</a>. A new
+<p>The information in this object can be found online at <a href="https://hla.alleles.org/pages/genes/genes_list/" class="uri">https://hla.alleles.org/pages/genes/genes_list/</a>. A new
 <em>IMGTHLAGeneTypes</em> can be built using the <em>updateAll()</em>
 function, although the source data is not expected to change unless new
 genes are added to the IPD-IMGT/HLA Database.</p>
@@ -1002,6 +1002,27 @@ multiQueryRelease(&quot;1.05.0&quot;,&quot;304&quot;,TRUE)
 [1] &quot;A*0304&quot;    &quot;A*3304&quot;    &quot;B*1304&quot;    &quot;Cw*03041&quot;  &quot;Cw*03042&quot;  &quot;DQB1*0304&quot; &quot;DRB1*0304&quot; &quot;DRB1*1304&quot; &quot;B*5304&quot;    &quot;A*2304&quot;   
 multiQueryRelease(&quot;3.58.0&quot;,c(&quot;DPB&quot;,&quot;2N&quot;),TRUE)
 [1] &quot;DPB1*786:01:02N&quot; &quot;DPB1*401:01:02N&quot;</code></pre>
+<p>The <em>verifyAllele()</em> function searches the AlleleListHistory
+object to determine if a specific allele name ever existed, and
+optionally returns the IPD-IMGT/HLA Database release versions in which
+that allele name existed and the allele’s accession number.</p>
+<pre><code>verifyAllele(&quot;A*02011&quot;,TRUE)
+[1] &quot;TRUE&quot;   &quot;1.15.0&quot;
+&gt; verifyAllele(&quot;A*02011&quot;,TRUE,TRUE)
+[1] &quot;TRUE&quot;   &quot;1.15.0&quot; &quot;1.14.0&quot; &quot;1.13.0&quot; &quot;1.12.0&quot; &quot;1.11.0&quot; &quot;1.10.0&quot; &quot;1.09.0&quot; &quot;1.08.0&quot; &quot;1.07.0&quot; &quot;1.06.0&quot; &quot;1.05.0&quot;
+&gt; verifyAllele(&quot;A*02011&quot;,TRUE,TRUE,TRUE,TRUE)
+[1] &quot;TRUE&quot;     &quot;1.05.0&quot;   &quot;HLA00005&quot;
+&gt; verifyAllele(&quot;A*02011&quot;,TRUE,TRUE,FALSE,TRUE)
+[1] &quot;TRUE&quot;     &quot;1.15.0&quot;   &quot;1.14.0&quot;   &quot;1.13.0&quot;   &quot;1.12.0&quot;   &quot;1.11.0&quot;   &quot;1.10.0&quot;   &quot;1.09.0&quot;   &quot;1.08.0&quot;   &quot;1.07.0&quot;   &quot;1.06.0&quot;   &quot;1.05.0&quot;   &quot;HLA00005&quot;
+&gt; verifyAllele(&quot;A*0201101&quot;,TRUE,TRUE,FALSE,TRUE)
+[1] FALSE
+verifyAllele(&quot;A*020101&quot;,TRUE,FALSE,TRUE)
+[1] &quot;TRUE&quot;   &quot;1.16.0&quot;
+verifyAllele(&quot;A*02:01:01:01&quot;,TRUE,FALSE,TRUE,TRUE)
+[1] &quot;TRUE&quot;     &quot;3.00.0&quot;   &quot;HLA00005&quot;
+verifyAllele(&quot;A*02:01:01:01&quot;,TRUE,FALSE,FALSE,TRUE)
+[1] &quot;TRUE&quot;     &quot;3.60.0&quot;   &quot;HLA00005&quot;
+</code></pre>
 </div>
 <div id="searching-alignments-at-specific-positions" class="section level2">
 <h2>Searching Alignments at Specific Positions</h2>
@@ -1041,6 +1062,45 @@ vector of sequence positions must be characters.</p>
 [1] &quot;GA&quot;
 alignmentSearch(&quot;nuc&quot;,&quot;DPA1*01:103&quot;,c(&quot;181&quot;,&quot;181.1&quot;,&quot;181.2&quot;,&quot;182&quot;),prefix=FALSE,sep=&quot;&quot;)
 [1] &quot;G..A&quot;</code></pre>
+</div>
+<div id="identifying-sequence-variants-at-specific-positions-and-their-frequencies-across-all-alleles" class="section level2">
+<h2>Identifying Sequence Variants at Specific Positions and their
+Frequencies Across all Alleles</h2>
+<p>The <em>queryPositions()</em> function identifies all of the variants
+at a single position in a specified locus for a specific type of
+alignment.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><em>alignType</em>: The alignment type of either “codon”, “gen”,
+nuc” or “prot”. Only a single alignType can be specified.</li>
+<li><em>locus</em>: A locus in HLAalignments.</li>
+<li><em>positions</em>: A vector of sequence positions (e.g., 86,
+c(1,2,3,4,5), c(1:5), c(1,2,3,15:20,30)). If positions do not exist in a
+specified alignment, a message is returned.</li>
+<li><em>table</em>: A logical value indicating if a data frame
+describing the counts and frequencies for each variant should be
+returned (TRUE) or if a vector of all variants should be returned
+(FALSE). The default value is FALSE.</li>
+</ul>
+<pre><code>queryPositions(&quot;prot&quot;,&quot;DRB1&quot;,86)
+ [1] &quot;.&quot; &quot;A&quot; &quot;C&quot; &quot;D&quot; &quot;G&quot; &quot;L&quot; &quot;M&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot;
+ 
+queryPositions(&quot;prot&quot;,&quot;DRB1&quot;,86,TRUE)
+$DRB1_86
+   Variant Count    Frequency
+1        .    71 0.0185620915
+2        A     6 0.0015686275
+3        C    10 0.0026143791
+4        D     5 0.0013071895
+5        G  1887 0.4933333333
+6        L     4 0.0010457516
+7        M     4 0.0010457516
+8        Q     1 0.0002614379
+9        R     1 0.0002614379
+10       S     2 0.0005228758
+11       V  1825 0.4771241830
+12       W     5 0.0013071895
+13       X     4 0.0010457516</code></pre>
 </div>
 <div id="searching-alignments-for-sequence-motifs" class="section level2">
 <h2>Searching Alignments for Sequence Motifs</h2>
