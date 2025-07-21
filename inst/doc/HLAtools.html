@@ -356,7 +356,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(HLAtools)</span></code></pre></div>
 <ul>
-<li>Package Version: 1.6.2</li>
+<li>Package Version: 1.6.3</li>
 </ul>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
@@ -558,24 +558,24 @@ characteristics.</p>
 function, although the source data is not expected to change unless new
 genes are added to the IPD-IMGT/HLA Database.</p>
 </div>
-<div id="gazeeteer-of-hla-region-genes" class="section level3">
-<h3>Gazeeteer of HLA Region Genes</h3>
-<p>The <em>HLAgazeteer</em> data object is a list object that organizes
+<div id="gazetteer-of-hla-region-genes" class="section level3">
+<h3>Gazetteer of HLA Region Genes</h3>
+<p>The <em>HLAgazetteer</em> data object is a list object that organizes
 the HLA region genes supported by the IPD-IMGT/HLA Database in nineteen
 vectors describing the availability of alignments, gene functionality,
-group identity and map order. A new <em>HLAgazeteer</em> can be built
+group identity and map order. A new <em>HLAgazetteer</em> can be built
 after each IPD-IMGT/HLA Database release using the <em>updateAll()</em>
-function, although the <em>HLAgazeteer</em> is not expected to change
+function, although the <em>HLAgazetteer</em> is not expected to change
 unless new genes are added to the IPD-IMGT/HLA Database.</p>
-<pre><code>names(HLAgazeteer)
+<pre><code>names(HLAgazetteer)
  [1] &quot;align&quot; &quot;gen&quot; &quot;nuc&quot; &quot;prot&quot; &quot;nogen&quot; &quot;nonuc&quot; &quot;noprot&quot; &quot;pseudo&quot; &quot;frag&quot; &quot;hla&quot; &quot;expressed&quot; &quot;notexpressed&quot; &quot;classireg&quot; &quot;classihla&quot; &quot;classiireg&quot; &quot;classiihla&quot; &quot;classical&quot; &quot;nonclassical&quot; &quot;map&quot; &quot;version&quot;     </code></pre>
 <p>For example, the <em>$align</em> vector includes all of the genes for
 which <strong>sequence alignments</strong> are available:</p>
-<pre><code>HLAgazeteer$align
+<pre><code>HLAgazetteer$align
  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;DMA&quot; &quot;DMB&quot; &quot;DOA&quot; &quot;DOB&quot; &quot;DPA1&quot; &quot;DPA2&quot; &quot;DPB1&quot; &quot;DPB2&quot; &quot;DQA1&quot; &quot;DQA2&quot; &quot;DQB1&quot; &quot;DQB2&quot; &quot;DRA&quot;  &quot;DRB1&quot; &quot;DRB2&quot; &quot;DRB3&quot; &quot;DRB4&quot; &quot;DRB5&quot; &quot;DRB6&quot; &quot;DRB7&quot; &quot;DRB8&quot; &quot;DRB9&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;HFE&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;MICA&quot; &quot;MICB&quot; &quot;N&quot; &quot;P&quot; &quot;S&quot; &quot;T&quot; &quot;TAP1&quot; &quot;TAP2&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;Y&quot;     </code></pre>
 <p>The <em>$prot</em> vector includes all of the genes with
 <strong>protein</strong> alignments:</p>
-<pre><code>HLAgazeteer$prot
+<pre><code>HLAgazetteer$prot
  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;DMA&quot; &quot;DMB&quot; &quot;DOA&quot; &quot;DOB&quot; &quot;DPA1&quot; &quot;DPB1&quot; &quot;DQA1&quot; &quot;DQA2&quot; &quot;DQB1&quot; &quot;DQB2&quot; &quot;DRA&quot; &quot;DRB1&quot; &quot;DRB3&quot; &quot;DRB4&quot; &quot;DRB5&quot; &quot;DRB&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;HFE&quot; &quot;MICA&quot; &quot;MICB&quot; &quot;TAP1&quot; &quot;TAP2&quot;</code></pre>
 <p>Note that the <em>$prot</em> and <em>$nuc</em> vectors include a
 ‘DRB’ “gene”. While ‘DRB’ is not a gene name, the DRB_prot.txt file
@@ -791,9 +791,9 @@ below.</p>
 <em>buildAlignments()</em> to populate the <em>HLAalignments</em>
 object. When <em>alignmentFull()</em> is run, the resulting alignments
 will be built using the IPD-IMGT/HLA Database release under which the
-<em>HLAgazeteer</em> object was built (‘HLAgazeteer$version’). When
+<em>HLAgazetteer</em> object was built (‘HLAgazetteer$version’). When
 alignments for a different database release are desired,
-<em>updateAll()</em> should be used to update the <em>HLAgazeteer</em>
+<em>updateAll()</em> should be used to update the <em>HLAgazetteer</em>
 to the desired release version before applying
 <em>alignmentFull()</em>.</p>
 <p><strong>Requirements</strong></p>
@@ -811,14 +811,14 @@ of RAM.</p>
 <ul>
 <li><em>loci</em>: A vector of the locus names for which alignments
 should be built. The default value (“all”) specifies all loci. Allowed
-loci are listed in <em>HLAgazeteer$align</em>.</li>
+loci are listed in <em>HLAgazetteer$align</em>.</li>
 <li><em>alignType</em>: A vector of alignment types for which alignments
 should be built. Allowed values are “prot”, “codon”, “nuc” and “gen”,
 which specify respective protein, codon, nucleotide and genomic
 alignments, as well as the default value (“all”), which specifies all
 four alignment types. Loci with alignments for a specific
-<em>alignType</em> are defined in <em>HLAgazeteer$prot</em>,
-<em>HLAgazeteer$nuc</em> and <em>HLAgazeteer$gen</em>.</li>
+<em>alignType</em> are defined in <em>HLAgazetteer$prot</em>,
+<em>HLAgazetteer$nuc</em> and <em>HLAgazetteer$gen</em>.</li>
 <li><em>version</em>: A character string identifying the IPD-IMGT/HLA
 Database release version for which alignments should be built. The
 default value (“Latest”) generates alignments for the most recent
@@ -839,19 +839,19 @@ current release.</p>
 <pre><code>HLAalignments &lt;- alignmentFull(loci = c(&quot;C&quot;,&quot;DQB1&quot;,&quot;DPA1&quot;,&quot;DRB5&quot;)) </code></pre>
 <p>Generate a protein alignment for one gene in release version
 3.54.0.</p>
-<pre><code>updateAll(updateType = &quot;HLAgazeteer&quot;,version = &quot;3.54.0&quot;)
+<pre><code>updateAll(updateType = &quot;HLAgazetteer&quot;,version = &quot;3.54.0&quot;)
 HLAalignments &lt;- alignmentFull(&quot;DRB1&quot;,&quot;prot&quot;,&quot;3.54.0&quot;) </code></pre>
 </div>
 <div id="working-with-alignments-in-past-releases" class="section level2">
 <h2>Working with Alignments in Past Releases</h2>
 <p>As indicated above, <em>alignmentFull()</em> can be applied for any
 IPD-IMGT/HLA Database release version. The <em>updateAll()</em> function
-must be applied to build the <em>HLAgazeteer</em> for the desired
+must be applied to build the <em>HLAgazetteer</em> for the desired
 release version <strong>before</strong> applying
 <em>alignmentFull()</em>.</p>
 <pre><code>&gt; updateAll()
 IMGTHLAGeneTypes for version 12-10-2022 is already loaded.
-HLAgazeteer for version 3.56.0 has been built and loaded.
+HLAgazetteer for version 3.56.0 has been built and loaded.
 alleleListHistory for version 3.56.0 has been built and loaded
 fragmentFeatureNames for version 3.56.0 has been built and loaded.
 HLAatlas for version 3.56.0 has been built and loaded.
@@ -872,26 +872,26 @@ alignments are in ‘DRB_gen.txt’ files, and these alignments are in
 ‘DRB1_gen.txt’ files in subsequent releases. Building DPA1, DPB1, DQA1,
 DQB1, DRB1, DRB3, DRB4 and DRB5 sequence alignments from these earlier
 releases may require specifying a gene name that does not include the
-numerical suffix. When the <em>HLAgazeteer</em> has been updated to the
+numerical suffix. When the <em>HLAgazetteer</em> has been updated to the
 desired release version, the available gene names for that release can
-be found in the <em>HLAgazeteer</em>.</p>
+be found in the <em>HLAgazetteer</em>.</p>
 <p>In all version 3.*.* releases (3.0.0 to 3.59.0), nucleotide
 alignments for the DRB2, DRB6, DRB7 and DRB9 genes are included in the
 ‘DRB_nuc.txt’ file.</p>
 <p>As noted above, when building alignments for past releases, the
-<em>HLAgazeteer</em> should be updated to reflect the gene names
+<em>HLAgazetteer</em> should be updated to reflect the gene names
 included in that release, and consulted to determine which gene names
 should be provided to alignmentFull().</p>
 <pre><code>updateAll(version = &quot;3.20.0&quot;)
 IMGTHLAGeneTypes for version 12-10-2022 is already loaded.
-HLAgazeteer for version 3.20.0 has been built and loaded.
+HLAgazetteer for version 3.20.0 has been built and loaded.
 alleleListHistory for version 3.20.0 has been built and loaded
 fragmentFeatureNames for version 3.20.0 has been built and loaded.
 HLAatlas for version 3.20.0 has been built and loaded.
 
-HLAgazeteer$version
+HLAgazetteer$version
 [1] &quot;3.20.0&quot;
-HLAgazeteer$align
+HLAgazetteer$align
  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;DMA&quot; &quot;DMB&quot; &quot;DOA&quot; &quot;DOB&quot; &quot;DPA&quot; &quot;DPB&quot; &quot;DQA&quot; &quot;DQB&quot; &quot;DRA&quot; &quot;DRB3&quot; &quot;DRB4&quot; &quot;DRB&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;MICA&quot; &quot;MICB&quot; &quot;P&quot; &quot;TAP1&quot; &quot;TAP2&quot; &quot;V&quot; &quot;Y&quot;
 
 HLAalignments &lt;- alignmentFull(c(&quot;C&quot;,&quot;DQB&quot;),alignType = c(&quot;nuc&quot;,&quot;gen&quot;),version = &quot;3.20.0&quot;)</code></pre>
