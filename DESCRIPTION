@@ -1,7 +1,7 @@
 Package: HLAtools
 Type: Package
 Title: Toolkit for HLA Immunogenomics
-Version: 1.6.3
+Version: 1.11.0
 Authors@R: 
     c(person("Livia", "Tran", , "livia.tran@ucsf.edu", role = c("aut")),
     person("Ryan", "Nickens", , "rynickens@gmail.com", role = c("aut")),
@@ -12,9 +12,8 @@ Authors@R:
     person("Steven", "Mack", , "Steven.Mack@ucsf.edu", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-9820-9547")))
 Maintainer: Steven Mack <Steven.Mack@ucsf.edu>
-Description: A toolkit for the analysis and management of data for genes in the so-called "Human Leukocyte Antigen" (HLA) region. Functions extract reference data from the Anthony Nolan HLA Informatics Group/ImmunoGeneTics HLA 'GitHub' repository (ANHIG/IMGTHLA) <https://github.com/ANHIG/IMGTHLA>, validate Genotype List (GL) Strings, convert between UNIFORMAT and GL String Code (GLSC) formats, translate HLA alleles and GLSCs across ImmunoPolymorphism Database (IPD) IMGT/HLA Database release versions, identify differences between pairs of alleles at a locus, generate customized, multi-position sequence alignments, trim and convert allele-names across nomenclature epochs, and extend existing data-analysis methods.
+Description: A toolkit for the analysis and management of data for genes in the so-called "Human Leukocyte Antigen" (HLA) region. Functions extract reference data from the Anthony Nolan HLA Informatics Group/ImmunoGeneTics HLA 'GitHub' repository (ANHIG/IMGTHLA) <https://github.com/ANHIG/IMGTHLA>, validate Genotype List (GL) Strings, convert between UNIFORMAT and GL String Code (GLSC) formats, translate HLA alleles and GLSCs across ImmunoPolymorphism Database (IPD) IMGT/HLA Database release versions, identify differences between pairs of alleles at a locus, generate customized, multi-position sequence alignments, trim and convert allele-names across nomenclature epochs, and extend existing data-analysis methods. Tran et al., (2025) <doi:10.1111/iji.70013>. 
 Encoding: UTF-8
-RoxygenNote: 7.3.2
 Imports: DescTools, dplyr, fmsb, rvest, stats, stringr, tibble, utils,
         xfun
 Depends: R (>= 3.6.0)
@@ -25,8 +24,9 @@ Config/testthat/edition: 3
 VignetteBuilder: knitr
 License: GPL (>= 3)
 URL: <https://github.com/sjmack/HLAtools>
+Config/roxygen2/version: 8.0.0
 NeedsCompilation: no
-Packaged: 2025-07-21 05:06:52 UTC; sjmack
+Packaged: 2026-07-21 00:33:19 UTC; sjmack
 Author: Livia Tran [aut],
   Ryan Nickens [aut],
   Leamon Crooms IV [aut],
@@ -35,4 +35,4 @@ Author: Livia Tran [aut],
   Josh Bredeweg [ctb],
   Steven Mack [aut, cre] (ORCID: <https://orcid.org/0000-0001-9820-9547>)
 Repository: CRAN
-Date/Publication: 2025-07-21 05:50:02 UTC
+Date/Publication: 2026-07-22 08:10:14 UTC

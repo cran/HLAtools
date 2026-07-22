@@ -1,5 +1,52 @@
 ### HLAtools
 
+### version 1.11.0
+- July 19, 2026
+- Added the buildGenomicReferences() function and the IMGTGenomicReferences data object.
+- Added IMGTGenomicReferences to global variables.
+- Added capacity to build new IMGTGenomicReferences data objects to updateAll().
+- Updated ReadMe and Vignette.
+
+### version 1.10.0
+- July 15, 2026
+- Updated the documentation for HLAgazetteer to include the conserved ancestral HLA haplotype blocks.
+- Changed reference from 'HLAtools::HLAgazetteer\$version' to 'HLAgazetteer\$version' in multiLocusValidation().
+- Changed four references from 'HLAtools::HLAgazetteer\$' to 'HLAgazetteer\$' in validateLocus().
+- Changed nine references from 'HLAtools::HLAgazetteer\$' to 'HLAgazetteer\$' in buildAlignments()
+- Updated multiLocusValidation() to halt further execution if all provided locus names are invalid. 
+
+### version 1.9.1
+- June 18, 2026
+- Updated atlasMaker() to address the terminal sequence block issue addressed for buildAlignments().
+- Updated bundled fragmentFeatureNames, HLAatlas, HLAgazetteer and IMGTHLAGeneTypes data objects to version 3.64.0.
+
+### version 1.9.0
+- June 16, 2026
+- Updated buildAlignments() to extend terminal sequence block based on the longest 'appendix' sequence rather than the final 'appendix' sequence for all cDNA and TAP2 alignments.
+
+### version 1.8.1
+- May 29, 2026
+- Added @examples to compareSequences() documentation.
+- Removed escapes from customAlign() examples.
+- Standardized the formatting of data object names in ReadMe.md.
+- Updated the ANHIG/IMGT-HLA GitHub Repository version for loaded data objects.
+
+### version 1.8.0
+- May 28, 2026
+- Updated compareSequences() apply to alleles at different loci. Thanks to Martin Maiers for the suggestion. 
+
+### version 1.7.0
+- May 27, 2026
+- Added gene-content definitions for conserved ancestral HLA haplotype blocks (Dawkins et al. 1999; Kulski et al. 2022) to HLAgazetteer.
+
+### version 1.6.4
+- December 17, 2025
+- Added the 'return_corr_table' parameter to the buildAlignments() function, enabling the return of 'correspondence tables', relating the named positions in an alignment to the ordinal numbers for those positions and the ordinal numbers of each insertion position, instead of alignments.
+- Updated DESCRIPTION to include a reference to Tran et al., (2025) doi:10.1111/iji.70013, describing the package.
+- March 30, 2026
+- Updated getLatestVersion() to change release values that do not end in '.0' to "#.##.0" using "release_version.txt" instead of "Allelelist_history.txt".
+- Updated bundled data objects to version 3.63.0.
+
 ### version 1.6.3
 - July 20, 2025
 - Changed all instances of 'HLAgazeteer' in the package to 'HLAgazetteer'. The former 'HLAgazeteer' object is now the 'HLAgazetteer', and the former 'buildGazeteer()' function is now 'buildGazetteer()'.

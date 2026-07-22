@@ -1,4 +1,4 @@
-#### unified alignment search and construction functions v5.2.0 29 April 2025 Ryan Nickens & Steven Mack 
+#### unified alignment search and construction functions v6.0.0 28 May 2026 Ryan Nickens & Steven Mack 
 
 ################
 #AlignmentSearch
